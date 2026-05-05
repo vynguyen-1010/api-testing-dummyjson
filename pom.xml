@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.dummyjson</groupId>
+  <artifactId>api-testing-dummyjson</artifactId>
+  <version>1.0</version>
+
+  <name>api-testing-dummyjson</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Versions -->
+    <restassured.version>6.0.0</restassured.version>
+    <testng.version>7.12.0</testng.version>
+    <jackson.version>2.21.3</jackson.version>
+    <extent.version>5.1.2</extent.version>
+    <faker.version>1.0.2</faker.version>
+    <dotenv.version>3.2.0</dotenv.version>
+  </properties>
+
+  <dependencies>
+      <!-- REST ASSURED -->
+      <dependency>
+          <groupId>io.rest-assured</groupId>
+          <artifactId>rest-assured</artifactId>
+          <version>${restassured.version}</version>
+          <scope>test</scope>
+      </dependency>
+
+      <!-- TESTNG -->
+      <dependency>
+          <groupId>org.testng</groupId>
+          <artifactId>testng</artifactId>
+          <version>${testng.version}</version>
+          <scope>test</scope>
+      </dependency>
+
+      <!-- JACKSON (JSON PARSING) -->
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>${jackson.version}</version>
+          <scope>compile</scope>
+      </dependency>
+
+      <!-- EXTENT REPORT -->
+      <dependency>
+          <groupId>com.aventstack</groupId>
+          <artifactId>extentreports</artifactId>
+          <version>${extent.version}</version>
+          <scope>compile</scope>
+      </dependency>
+
+      <!-- FAKER (DATA GENERATOR) -->
+      <dependency>
+          <groupId>com.github.javafaker</groupId>
+          <artifactId>javafaker</artifactId>
+          <version>${faker.version}</version>
+          <scope>compile</scope>
+      </dependency>
+
+      <!-- DOTENV (LOAD .env) -->
+      <dependency>
+          <groupId>io.github.cdimascio</groupId>
+          <artifactId>dotenv-java</artifactId>
+          <version>${dotenv.version}</version>
+          <scope>compile</scope>
+      </dependency>
+
+      <!-- LOGGING -->
+      <dependency>
+          <groupId>org.apache.logging.log4j</groupId>
+          <artifactId>log4j-core</artifactId>
+          <version>2.25.4</version>
+          <scope>compile</scope>
+      </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- SUREFIRE: RUN TEST -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+          </suiteXmlFiles>
+
+          <!-- PASS ENV -->
+          <systemPropertyVariables>
+            <env>${env}</env>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+    </plugins>
+</build>
+
+</project>

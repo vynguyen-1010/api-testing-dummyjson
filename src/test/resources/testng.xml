@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API Test Suite" parallel="false">
+
+    <test name="User API Tests">
+        <classes>
+            <class name="tests.user.GetUserTest"/>
+        </classes>
+    </test>
+
+</suite>
