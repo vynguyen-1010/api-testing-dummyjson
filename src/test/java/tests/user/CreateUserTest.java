@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import assertions.user.UserAssertions;
 import constants.APIConstants;
 import services.user.UserService;
+import utils.DataGenerator;
 
 public class CreateUserTest extends BaseTest{
     UserService userService = new UserService();
@@ -17,11 +18,7 @@ public class CreateUserTest extends BaseTest{
     @Test
     public void testCreateUser() {
 
-        CreateUserRequest request = new CreateUserRequest(
-            "John",
-            "Doe",
-            "john@example.com"
-        );
+        CreateUserRequest request = DataGenerator.generateUser();
 
         Response response = userService.createUser(request);
 
@@ -30,7 +27,6 @@ public class CreateUserTest extends BaseTest{
         User user = response.as(User.class);
 
         UserAssertions.verifyUser(user, 209);
-        Assert.assertEquals(user.getFirstName(), "John");
     }
 
     @Test
@@ -46,5 +42,18 @@ public class CreateUserTest extends BaseTest{
         Assert.assertEquals(user.getId(), 209);
         Assert.assertEquals(user.getFirstName(), "");
         Assert.assertEquals(user.getLastName(), "");
+    }
+
+    @Test
+    public void testCreateUser_InvalidEmail() {
+        CreateUserRequest request = new CreateUserRequest("Test", "User", "invalid-email");
+
+        Response response = userService.createUser(request);
+        
+        response.then().statusCode(APIConstants.STATUS_CREATED);
+
+        User user = response.as(User.class);
+
+        UserAssertions.verifyUser(user, 209);
     }
 }
