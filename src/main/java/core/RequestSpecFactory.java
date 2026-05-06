@@ -12,11 +12,15 @@ public class RequestSpecFactory {
 
         if (requestSpec == null) {
 
-            requestSpec = new RequestSpecBuilder()
+            RequestSpecBuilder builder = new RequestSpecBuilder()
                 .setBaseUri(ConfigManager.getBaseUrl())
-                .addHeader("Content-Type", "application/json")
-                .addFilter(LoggerUtils.logRequestAndResponse())
-                .build();
+                .addHeader("Content-Type", "application/json");
+
+            if (ConfigManager.isLoggingEnabled()) {
+                builder.addFilter(LoggerUtils.logRequestAndResponse());
+            }
+
+            requestSpec = builder.build();
         }
 
         return requestSpec;

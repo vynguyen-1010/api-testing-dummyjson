@@ -1,9 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="API Test Suite" parallel="false">
 
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+    </listeners>
+
     <test name="User API Tests">
         <classes>
             <class name="tests.user.GetUserTest"/>
+            <class name="tests.user.CreateUserTest"/>
         </classes>
     </test>
 

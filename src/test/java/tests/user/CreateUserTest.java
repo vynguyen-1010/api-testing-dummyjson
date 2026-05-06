@@ -49,7 +49,7 @@ public class CreateUserTest extends BaseTest{
         CreateUserRequest request = new CreateUserRequest("Test", "User", "invalid-email");
 
         Response response = userService.createUser(request);
-        
+
         response.then().statusCode(APIConstants.STATUS_CREATED);
 
         User user = response.as(User.class);

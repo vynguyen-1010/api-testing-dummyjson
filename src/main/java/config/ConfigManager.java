@@ -8,4 +8,9 @@ public class ConfigManager {
     public static String getToken() {
         return EnvReader.get("TOKEN");
     }
+
+    public static boolean isLoggingEnabled() {
+        String value = EnvReader.get("ENABLE_LOG");
+        return value != null && value.equalsIgnoreCase("true");
+    }
 }
