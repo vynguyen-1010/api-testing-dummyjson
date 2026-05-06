@@ -6,6 +6,8 @@ import models.user.CreateUserRequest;
 import models.user.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import assertions.user.UserAssertions;
 import constants.APIConstants;
 import services.user.UserService;
 
@@ -16,9 +18,9 @@ public class CreateUserTest extends BaseTest{
     public void testCreateUser() {
 
         CreateUserRequest request = new CreateUserRequest(
-                "John",
-                "Doe",
-                "john@example.com"
+            "John",
+            "Doe",
+            "john@example.com"
         );
 
         Response response = userService.createUser(request);
@@ -27,6 +29,22 @@ public class CreateUserTest extends BaseTest{
 
         User user = response.as(User.class);
 
+        UserAssertions.verifyUser(user, 209);
         Assert.assertEquals(user.getFirstName(), "John");
+    }
+
+    @Test
+    public void testCreateUser_MissingField() {
+        String invalidBoy = "{}";
+
+        Response response = userService.createUser(invalidBoy);
+
+        response.then().statusCode(APIConstants.STATUS_CREATED);
+
+        User user = response.as(User.class);
+
+        Assert.assertEquals(user.getId(), 209);
+        Assert.assertEquals(user.getFirstName(), "");
+        Assert.assertEquals(user.getLastName(), "");
     }
 }
