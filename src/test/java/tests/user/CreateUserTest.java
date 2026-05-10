@@ -4,6 +4,8 @@ import core.BaseTest;
 import io.restassured.response.Response;
 import models.user.CreateUserRequest;
 import models.user.User;
+import retry.RetryAnalyzer;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,7 +17,7 @@ import utils.DataGenerator;
 public class CreateUserTest extends BaseTest{
     UserService userService = new UserService();
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void testCreateUser() {
 
         CreateUserRequest request = DataGenerator.generateUser();

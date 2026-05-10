@@ -3,6 +3,7 @@ package tests.user;
 import core.BaseTest;
 import io.restassured.response.Response;
 import models.user.User;
+import retry.RetryAnalyzer;
 
 import org.testng.annotations.Test;
 
@@ -15,7 +16,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class GetUserTest extends BaseTest{
     UserService userService = new UserService();
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void testGetUser() {
         Response response = userService.getUser(1);
 
