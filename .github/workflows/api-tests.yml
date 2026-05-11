@@ -19,12 +19,12 @@ on:
       suite:
         description: 'Test suite'
         required: true
-        default: 'smoke.xml'
+        default: 'smoke-suite.xml'
         type: choice
         options:
           - user-suite.xml
-          - smoke.xml
-          - regression.xml
+          - smoke-suite.xml
+          - regression-suite.xml
 
   schedule:
     - cron: '0 19 * * *'
@@ -52,7 +52,7 @@ jobs:
         run: |
           mvn clean test \
           -Denv=${{ github.event.inputs.environment || 'staging' }} \
-          -DsuiteXmlFile=src/test/resources/suites/${{ github.event.inputs.suite || 'smoke.xml' }}
+          -DsuiteXmlFile=src/test/resources/suites/${{ github.event.inputs.suite || 'smoke-suite.xml' }}
 
       - name: Generate Allure Report
         run: |
