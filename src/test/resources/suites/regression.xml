@@ -6,6 +6,11 @@
     </listeners>
 
     <test name="Regression Test">
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
         <packages>
             <package name="tests.user"/>
         </packages>
