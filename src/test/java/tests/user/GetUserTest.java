@@ -16,7 +16,7 @@ public class GetUserTest extends BaseTest{
     UserService userService = new UserService();
 
     @Feature("Get User")
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(retryAnalyzer = RetryAnalyzer.class, groups = "smoke")
     public void testGetUser() {
         Response response = userService.getUser(1);
 
@@ -28,7 +28,7 @@ public class GetUserTest extends BaseTest{
     }
 
     @Feature("Get User")
-    @Test
+    @Test(groups = "regression")
     public void testGetUser_UserNotFound() {
         Response response = userService.getUser(999999);
 
@@ -36,7 +36,7 @@ public class GetUserTest extends BaseTest{
     }
 
     @Feature("Get User")
-    @Test
+    @Test(groups = "regression")
     public void testGetUser_InvalidId() {
         Response response = userService.getUser(-1);
 

@@ -16,8 +16,8 @@ import utils.DataGenerator;
 public class CreateUserTest extends BaseTest{
     UserService userService = new UserService();
 
-    @Feature("Create User")
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Feature("Smoke Test - Create User")
+    @Test(retryAnalyzer = RetryAnalyzer.class, groups = "smoke")
     public void testCreateUser() {
 
         CreateUserRequest request = DataGenerator.generateUser();
@@ -32,7 +32,7 @@ public class CreateUserTest extends BaseTest{
     }
 
     @Feature("Create User")
-    @Test
+    @Test(groups = "regression")
     public void testCreateUser_MissingField() {
         String invalidBoy = "{}";
 
@@ -48,7 +48,7 @@ public class CreateUserTest extends BaseTest{
     }
 
     @Feature("Create User")
-    @Test
+    @Test(groups = "regression")
     public void testCreateUser_InvalidEmail() {
         CreateUserRequest request = new CreateUserRequest("Test", "User", "invalid-email");
 
