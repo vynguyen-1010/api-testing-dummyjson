@@ -19,7 +19,7 @@ on:
       suite:
         description: 'Test suite'
         required: true
-        default: 'user-suite.xml'
+        default: 'smoke.xml'
         type: choice
         options:
           - user-suite.xml
@@ -49,11 +49,11 @@ jobs:
           java-version: 17
           cache: maven
 
-      - name: Run API tests
+      - name: Run API tests (when commiting code)
         run: |
           mvn clean test \
-          -Denv=${{ github.event.inputs.environment || 'dev' }} \
-          -DsuiteXmlFile=src/test/resources/suites/${{ github.event.inputs.suite || 'regression.xml' }}
+          -Denv=${{ github.event.inputs.environment || 'stagging' }} \
+          -DsuiteXmlFile=src/test/resources/suites/${{ github.event.inputs.suite || 'smoke.xml' }}
 
       - name: Upload Allure Results
         if: always()
