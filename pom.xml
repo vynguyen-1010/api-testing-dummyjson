@@ -82,6 +82,13 @@
           <scope>compile</scope>
       </dependency>
 
+      <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-testng</artifactId>
+        <version>2.34.0</version>
+        <scope>compile</scope>
+      </dependency>
+
   </dependencies>
 
   <build>
@@ -100,7 +107,25 @@
           <systemPropertyVariables>
             <env>${env}</env>
           </systemPropertyVariables>
+
+          <argLine>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar"
+          </argLine>
         </configuration>
+
+        <dependencies>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.22.1</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.12.0</version>
       </plugin>
     </plugins>
 </build>
