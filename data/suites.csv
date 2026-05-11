@@ -1,3 +1,3 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Mon May 11 16:49:51 UTC 2026","Mon May 11 16:49:53 UTC 2026","1769","Smoke API Suite","Smoke Test","tests.smoke.CreateUserTest","tests.smoke.CreateUserTest","testCreateUser","testCreateUser",""
-"passed","Mon May 11 16:49:51 UTC 2026","Mon May 11 16:49:53 UTC 2026","1769","Smoke API Suite","Smoke Test","tests.smoke.SmokeGetUserTest","tests.smoke.SmokeGetUserTest","testGetUser","testGetUser",""
+"passed","Mon May 11 16:57:26 UTC 2026","Mon May 11 16:57:28 UTC 2026","1877","Smoke API Suite","Smoke Test","tests.smoke.CreateUserTest","tests.smoke.CreateUserTest","testCreateUser","testCreateUser",""
+"passed","Mon May 11 16:57:26 UTC 2026","Mon May 11 16:57:28 UTC 2026","1876","Smoke API Suite","Smoke Test","tests.smoke.SmokeGetUserTest","tests.smoke.SmokeGetUserTest","testGetUser","testGetUser",""
