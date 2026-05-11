@@ -26,7 +26,6 @@ public class CreateUserTest extends BaseTest{
         response.then().statusCode(APIConstants.STATUS_CREATED);
 
         User user = response.as(User.class);
-
         UserAssertions.verifyUser(user, 209);
     }
 }
