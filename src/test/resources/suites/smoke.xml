@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke API Suite" parallel="methods" thread-count="3">
+
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+    </listeners>
+
+    <test name="Smoke Test">
+        <packages>
+            <package name="tests.user"/>
+        </packages>
+    </test>
+
+</suite>
