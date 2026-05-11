@@ -1,14 +1,13 @@
 package tests.user;
 
 import core.BaseTest;
+import io.qameta.allure.Feature;
 import io.restassured.response.Response;
 import models.user.CreateUserRequest;
 import models.user.User;
 import retry.RetryAnalyzer;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import assertions.user.UserAssertions;
 import constants.APIConstants;
 import services.user.UserService;
@@ -17,6 +16,7 @@ import utils.DataGenerator;
 public class CreateUserTest extends BaseTest{
     UserService userService = new UserService();
 
+    @Feature("Create User")
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void testCreateUser() {
 
@@ -31,6 +31,7 @@ public class CreateUserTest extends BaseTest{
         UserAssertions.verifyUser(user, 209);
     }
 
+    @Feature("Create User")
     @Test
     public void testCreateUser_MissingField() {
         String invalidBoy = "{}";
@@ -46,6 +47,7 @@ public class CreateUserTest extends BaseTest{
         Assert.assertEquals(user.getLastName(), "");
     }
 
+    @Feature("Create User")
     @Test
     public void testCreateUser_InvalidEmail() {
         CreateUserRequest request = new CreateUserRequest("Test", "User", "invalid-email");
