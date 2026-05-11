@@ -52,7 +52,7 @@ jobs:
       - name: Run API tests (when commiting code)
         run: |
           mvn clean test \
-          -Denv=${{ github.event.inputs.environment || 'stagging' }} \
+          -Denv=${{ github.event.inputs.environment || 'staging' }} \
           -DsuiteXmlFile=src/test/resources/suites/${{ github.event.inputs.suite || 'smoke.xml' }}
 
       - name: Upload Allure Results
