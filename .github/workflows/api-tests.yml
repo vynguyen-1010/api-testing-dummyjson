@@ -27,7 +27,6 @@ on:
           - regression.xml
 
   schedule:
-    # 2:00 AM Vietnam = 19:00 UTC
     - cron: '0 19 * * *'
 
 jobs:
@@ -55,12 +54,16 @@ jobs:
           -Denv=${{ github.event.inputs.environment || 'staging' }} \
           -DsuiteXmlFile=src/test/resources/suites/${{ github.event.inputs.suite || 'smoke.xml' }}
 
+      - name: Generate Allure Report
+        run: |
+          mvn allure:report
+
       - name: Upload Allure Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: allure-results
-          path: target/allure-results
+          path: allure-results
 
       - name: Upload Extent Report
         if: always()
@@ -68,3 +71,11 @@ jobs:
         with:
           name: extent-report
           path: reports/
+
+      - name: Deploy Allure Report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/site/allure-maven-plugin
+          publish_branch: gh-pages
