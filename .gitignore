@@ -4,4 +4,3 @@ logs/
 reports/
 *.log
 allure-results
-.github/workflows
