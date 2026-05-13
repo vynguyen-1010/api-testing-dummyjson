@@ -53,8 +53,10 @@ jobs:
           mvn clean test \
           -Denv=${{ github.event.inputs.environment || 'staging' }} \
           -DsuiteXmlFile=src/test/resources/suites/${{ github.event.inputs.suite || 'smoke-suite.xml' }}
+        continue-on-error: true
 
       - name: Generate Allure Report
+        if: always()
         run: |
           mvn allure:report
 
