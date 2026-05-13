@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"e30855cc29dbdddd70e47a563b9f9e7c","name":"Regression API Suite","statistic":{"failed":1,"broken":0,"skipped":0,"passed":11,"unknown":0,"total":12}}]}
+{"total":1,"items":[{"uid":"d56a0a77e43c1c5f52af1626e2c78f07","name":"Smoke API Suite","statistic":{"failed":0,"broken":0,"skipped":0,"passed":2,"unknown":0,"total":2}}]}
