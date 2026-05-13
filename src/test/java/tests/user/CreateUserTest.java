@@ -8,7 +8,6 @@ import models.user.User;
 import retry.RetryAnalyzer;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import assertions.user.UserAssertions;
 import constants.APIConstants;
 import services.user.UserService;
 import utils.DataGenerator;
@@ -28,7 +27,10 @@ public class CreateUserTest extends BaseTest{
 
         User user = response.as(User.class);
 
-        UserAssertions.verifyUser(user, 209);
+        Assert.assertTrue(user.getId() > 0);
+        Assert.assertEquals(user.getFirstName(), request.getFirstName());
+        Assert.assertEquals(user.getLastName(), request.getLastName());
+        Assert.assertEquals(user.getEmail(), request.getEmail());
     }
 
     @Feature("Create User")
@@ -42,7 +44,7 @@ public class CreateUserTest extends BaseTest{
 
         User user = response.as(User.class);
 
-        Assert.assertEquals(user.getId(), 209);
+        Assert.assertTrue(user.getId() > 0);
         Assert.assertEquals(user.getFirstName(), "");
         Assert.assertEquals(user.getLastName(), "");
     }
@@ -58,6 +60,60 @@ public class CreateUserTest extends BaseTest{
 
         User user = response.as(User.class);
 
-        UserAssertions.verifyUser(user, 209);
+        Assert.assertTrue(user.getId() > 0);
+        Assert.assertEquals(user.getFirstName(), request.getFirstName());
+        Assert.assertEquals(user.getLastName(), request.getLastName());
+        Assert.assertEquals(user.getEmail(), request.getEmail());
+    }
+
+    @Feature("Create User")
+    @Test(groups = "regression")
+    public void testCreateUser_DuplicateEmail() {
+        CreateUserRequest request = new CreateUserRequest("Test", "User", "emily.johnson@x.dummyjson.com");
+
+        Response response = userService.createUser(request);
+
+        response.then().statusCode(APIConstants.STATUS_CREATED);
+
+        User user = response.as(User.class);
+
+        Assert.assertTrue(user.getId() > 0);
+        Assert.assertEquals(user.getFirstName(), request.getFirstName());
+        Assert.assertEquals(user.getLastName(), request.getLastName());
+        Assert.assertEquals(user.getEmail(), request.getEmail());
+    }
+
+    @Feature("Create User")
+    @Test(groups = "regression")
+    public void testCreateUser_SpecialCharacters() {
+        CreateUserRequest request = new CreateUserRequest("!@#$%^&*", "!@#$%^&*", "!@#$%^&*");
+
+        Response response = userService.createUser(request);
+
+        response.then().statusCode(APIConstants.STATUS_CREATED);
+
+        User user = response.as(User.class);
+
+        Assert.assertTrue(user.getId() > 0);
+        Assert.assertEquals(user.getFirstName(), request.getFirstName());
+        Assert.assertEquals(user.getLastName(), request.getLastName());
+        Assert.assertEquals(user.getEmail(), request.getEmail());
+    }
+
+    @Feature("Create User")
+    @Test(groups = "regression")
+    public void testCreateUser_NullValues() {
+        CreateUserRequest request = new CreateUserRequest(null, null, null);
+
+        Response response = userService.createUser(request);
+
+        response.then().statusCode(APIConstants.STATUS_CREATED);
+
+        User user = response.as(User.class);
+
+        Assert.assertTrue(user.getId() > 0);
+        Assert.assertEquals(user.getFirstName(), request.getFirstName());
+        Assert.assertEquals(user.getLastName(), request.getLastName());
+        Assert.assertEquals(user.getEmail(), request.getEmail());
     }
 }

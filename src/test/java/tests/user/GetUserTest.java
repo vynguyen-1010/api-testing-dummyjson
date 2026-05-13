@@ -50,6 +50,7 @@ public class GetUserTest extends BaseTest{
         Response response = userService.getUser(id);
 
         response.then().statusCode(APIConstants.STATUS_NOT_FOUND);
+        response.then().body("message", equalTo("User with id '" + id + "' not found"));
     }
 
     @Feature("Get User")
