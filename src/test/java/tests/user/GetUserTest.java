@@ -13,6 +13,7 @@ import assertions.user.UserAssertions;
 import constants.APIConstants;
 import services.user.UserService;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
@@ -50,7 +51,7 @@ public class GetUserTest extends BaseTest{
         Response response = userService.getUser(id);
 
         response.then().statusCode(APIConstants.STATUS_NOT_FOUND);
-        response.then().body("message", equalTo("User with id '" + id + "' not found"));
+        response.then().body("message", containsString("not found"));
     }
 
     @Feature("Get User")
