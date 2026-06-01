@@ -26,9 +26,6 @@ on:
           - smoke-suite.xml
           - regression-suite.xml
 
-  schedule:
-    - cron: '0 19 * * *'
-
 jobs:
   test:
     runs-on: ubuntu-latest
